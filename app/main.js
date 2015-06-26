@@ -5,19 +5,18 @@ var helloWorld = React.createClass({
         var map = this.map = L.map(this.getDOMNode(), {
             minZoom: 2,
             maxZoom: 20,
-            layers: [
-                L.tileLayer(
-                    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    {
-                        attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-                    }
-                )
-            ],
             attributionControl: false
         });
 
-        //L.control.fullscreen().addTo(map);
-        map.fitWorld();
+        var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+        var yndx = new L.Yandex();
+        var googleLayer = new L.Google('ROADMAP');
+
+        map.addLayer(osm);
+
+        map.addControl(new L.Control.Layers({'OSM':osm, "Yandex":yndx, "Google":googleLayer}));
+
+        map.setView([52.285577, 76.940947], 11);
     },
 
     render: function() {

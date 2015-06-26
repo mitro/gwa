@@ -14,7 +14,7 @@ gulp.task('transform', function() {
 });
 
 gulp.task('clean', function() {
-    return gulp.src(['./public/scripts'], {read: false})
+    return gulp.src(['./public/scripts/main.js'], {read: false})
         .pipe(clean());
 });
 
@@ -24,6 +24,16 @@ gulp.task('include-css', function() {
             'include css': true
         }))
         .pipe(gulp.dest('./public/styles'));
+});
+
+gulp.task('watch', ['default'], function(cb) {
+    console.log('watching files for changes...');
+    gulp.watch(
+        [
+            'app/styles/*',
+            'app/main.js'
+        ],
+        ['default']);
 });
 
 gulp.task('default', ['clean', 'include-css'], function() {
