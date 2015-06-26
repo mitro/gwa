@@ -3,7 +3,8 @@
 var gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     clean = require('gulp-clean'),
-    size = require('gulp-size');
+    size = require('gulp-size'),
+    stylus = require('gulp-stylus');
 
 gulp.task('transform', function() {
     return gulp.src('./app/main.js')
@@ -17,6 +18,14 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
-gulp.task('default', ['clean'], function() {
+gulp.task('include-css', function() {
+    gulp.src('./app/styles/*.styl')
+        .pipe(stylus({
+            'include css': true
+        }))
+        .pipe(gulp.dest('./public/styles'));
+});
+
+gulp.task('default', ['clean', 'include-css'], function() {
     gulp.start('transform');
 });

@@ -1,8 +1,27 @@
 var React = require('react');
 
 var helloWorld = React.createClass({
+    componentDidMount: function() {
+        var map = this.map = L.map(this.getDOMNode(), {
+            minZoom: 2,
+            maxZoom: 20,
+            layers: [
+                L.tileLayer(
+                    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    {
+                        attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+                    }
+                )
+            ],
+            attributionControl: false
+        });
+
+        //L.control.fullscreen().addTo(map);
+        map.fitWorld();
+    },
+
     render: function() {
-      return (<h2>Hello, I am Smartberry with Bower and watch!</h2>)
+      return <div id="map"/>
     }
 });
 
