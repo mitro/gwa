@@ -1,0 +1,3 @@
+export default {
+    POSITIONS_LOADED: 'POSITIONS_LOADED'
+}
