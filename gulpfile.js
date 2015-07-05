@@ -4,11 +4,12 @@ var gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     clean = require('gulp-clean'),
     size = require('gulp-size'),
-    stylus = require('gulp-stylus');
+    stylus = require('gulp-stylus'),
+    babelify = require('babelify');
 
 gulp.task('transform', function() {
-    return gulp.src('./app/main.js')
-        .pipe(browserify({transform: ['reactify']}))
+    return gulp.src('./app/scripts/main.js')
+        .pipe(browserify({transform: ['babelify']}))
         .pipe(gulp.dest('./public/scripts'))
         .pipe(size());
 });
@@ -30,8 +31,8 @@ gulp.task('watch', ['default'], function(cb) {
     console.log('watching files for changes...');
     gulp.watch(
         [
-            'app/styles/*',
-            'app/main.js'
+            'app/styles/**/*.*',
+            'app/scripts/**/*.*'
         ],
         ['default']);
 });

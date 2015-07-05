@@ -1,6 +1,6 @@
 var React = require('react');
 
-var helloWorld = React.createClass({
+var Map = React.createClass({
     componentDidMount: function() {
         var map = this.map = L.map(this.getDOMNode(), {
             minZoom: 2,
@@ -20,11 +20,8 @@ var helloWorld = React.createClass({
     },
 
     render: function() {
-      return <div id="map"/>
+        return <div id="map"/>
     }
 });
 
-React.render(
-    React.createElement(helloWorld, null),
-    document.getElementById('react-mount')
-);
+module.exports = Map;
